@@ -32,6 +32,14 @@ namespace Micro.GraphQL.Federation
             //type.SetAstType(definition);
             type.Metadata["__AST_MetaField__"] = definition;
         }
+        public static void BuildExtensionAstMeta(this IProvideMetadata type, string name, string value = null)
+        {
+            var definition = BuildGraphQLObjectTypeDefinition();
+            var directive = BuildGraphQLDirective(name, value, ASTNodeKind.Argument);
+            AddDirective(definition, directive);
+            // type.AddExtensionAstType(definition);
+            type.Metadata["__EXTENSION_AST_MetaField__"] = new List<ASTNode> {definition};
+        }
         private static void AddDirective(GraphQLObjectTypeDefinition definition, GraphQLDirective directive) => ((List<GraphQLDirective>)definition.Directives).Add(directive);
         private static GraphQLObjectTypeDefinition BuildGraphQLObjectTypeDefinition() => new GraphQLObjectTypeDefinition
         {

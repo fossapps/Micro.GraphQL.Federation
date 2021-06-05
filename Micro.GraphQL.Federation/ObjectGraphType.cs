@@ -17,6 +17,17 @@ namespace Micro.GraphQL.Federation
             this.BuildAstMeta("key", fields);
         }
 
+        protected void Extend()
+        {
+            this.BuildExtensionAstMeta("extends");
+        }
+
+        protected void ExtendByKeys(string fields)
+        {
+            Key(fields);
+            Extend();
+        }
+
         private void ResolveReferenceAsync(IFederatedResolver resolver)
         {
             // Metadata[FederatedSchemaBuilder.RESOLVER_METADATA_FIELD] = resolver;
