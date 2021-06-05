@@ -28,14 +28,14 @@ module.exports = {
         },
         {
             "path": "@semantic-release/exec",
-            "cmd": "dotnet pack --include-symbols -c Release --output ./artifacts -p:PackageVersion=${nextRelease.version}"
+            "cmd": "dotnet pack --include-symbols -c Release --output ./artifacts -p:SymbolPackageFormat=snupkg -p:PackageVersion=${nextRelease.version}"
         }
     ],
     "publish": [
         "@semantic-release/github",
         {
             "path": "@semantic-release/exec",
-            "cmd": "dotnet nuget push ./artifacts/*.nupkg -k ${ process.env.NUGET_TOKEN } -s https://api.nuget.org/v3/index.json --skip-duplicate"
+            "cmd": "dotnet nuget push ./artifacts/*.nupkg -k ${ process.env.NUGET_TOKEN } -s https://api.nuget.org/v3/index.json"
         }
     ]
 }
