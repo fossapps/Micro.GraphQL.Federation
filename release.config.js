@@ -35,7 +35,7 @@ module.exports = {
         "@semantic-release/github",
         {
             "path": "@semantic-release/exec",
-            "cmd": "dotnet nuget push ./artifacts/*.nupkg --api-key ${ process.env.NUGET_TOKEN } --source https://api.nuget.org/v3/index.json"
+            "cmd": "dotnet nuget push ./artifacts/*.nupkg -k ${ process.env.NUGET_TOKEN } -s https://api.nuget.org/v3/index.json"
         }
     ]
 }
