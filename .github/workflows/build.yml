@@ -23,6 +23,9 @@ jobs:
       - name: Semantic Release
         id: semantic
         uses: cycjimmy/semantic-release-action@v2
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
         with:
           extra_plugins: |
             @semantic-release/git@7.0.18
