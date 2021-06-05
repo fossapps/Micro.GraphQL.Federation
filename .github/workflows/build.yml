@@ -1,0 +1,30 @@
+name: Build and Test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with: 
+          dotnet-version: 5.0.203
+      - name: restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+  publish:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Semantic Release
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+          extra_plugins: |
+            @semantic-release/git@7.0.18
+            @semantic-release/exec@3.3.8
+            @semantic-release/changelog@3.0.0
